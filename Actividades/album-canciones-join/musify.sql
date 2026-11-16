@@ -7,4 +7,4 @@ INSERT INTO  albums (id,"name",year,artists_id_fk) VALUES (1,"Besos de perro", 2
 
 INSERT INTO  artists (id,"name") VALUES (1, "Jason Mraz"),(2, "Big_Bang"),(3,"Stray Kids"),(4, "Back street boys"),(5, "La pantera");
   
-SELECT "artists.name" AS name_artists, "albums.name" AS name_albums, year AS year_albums FROM albums INNER JOIN artists ON albums.artists_id_fk = artists.id;
+SELECT artists.name AS name_artists, albums.name AS name_albums, year AS year_albums FROM albums INNER JOIN artists ON albums.artists_id_fk = artists.id;
