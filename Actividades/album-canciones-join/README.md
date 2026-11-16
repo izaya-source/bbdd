@@ -7,6 +7,7 @@
 | 3 | Made | 2016 | 2 |
 | 4 | Una semana increible | 2024 | 5 |
 | 6 | Un verano sin ti | 2022 | NULL |
+| 9 | Tonight | 2011 | 2 |
 
 # Artists
 
@@ -18,7 +19,4 @@
 | 4 | Back street boys | 
 | 5 | La pantera |
 
-CREATE TABLE albums ( id INTEGER PRIMARY KEY, name TEXT NOT NULL, year INTEGER, artists_id_fk INTEGER);
-CREATE TABLE Artists ( id INTEGER PRIMARY KEY, name TEXT NOT NULL);
 
-SELECT artists.name AS name_artists, albums.name AS name_albums, year AS year_albums FROM artists
