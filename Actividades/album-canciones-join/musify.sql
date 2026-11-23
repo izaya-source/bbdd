@@ -1,19 +1,49 @@
+CREATE TABLE albums(
+    id INTEGER PRIMARY KEY,
+    name TEXT,
+    year TEXT,
+    artists_id_fk INTEGER,
+    cover TEXT
+);
 
-CREATE TABLE albums ( id INTEGER PRIMARY KEY, "name" TEXT NOT NULL, year INTEGER, artists_id_fk INTEGER, cover TEXT);
-CREATE TABLE artists ( id INTEGER PRIMARY KEY, "name" TEXT NOT NULL);
+CREATE TABLE artists(
+    id INTEGER PRIMARY KEY,
+    name TEXT
+);
 
-INSERT INTO  albums (id, "name", year, artists_id_fk, cover) VALUES (1, "Besos de perro", 2002, NULL, "cover/03-besos-de-perro.jpg"),(2, "Do it",2025, 3, "cover/do-it.jpeg"),
-  (3,"Made",2016, 2,"cover/made.jpeg"),(4,"Una semana increible", 2024, 5,"cover/una semana increible.jpg"),(6,"Un verano sin ti", 2022, NULL,"cover/un verano sin ti.jpeg"),(9,"Tonight", 2011, 2,"cover/tonight.jpg");
+CREATE TABLE songs(
+    id INTEGER PRIMARY KEY,
+    name TEXT,
+    album_id_fk INTEGER,
+    duracion INTEGER
+);
 
-INSERT INTO  artists (id,"name") VALUES (1, "Jason Mraz"),(2, "Big_Bang"),(3,"Stray Kids"),(4, "Back street boys"),(5, "La pantera");
+INSERT INTO albums (id, name, year, artists_id_fk, cover) 
+VALUES (1, 'Besos de perro', '2002', Null, 'img/besos de perro.jpg'), 
+        (2, 'Do it', '2025', 3, 'img/do it.jpeg'), 
+        (3, 'Made', '2016', 2, 'img/made.jpeg'),    
+        (4, 'Una semana increible', '2024', 5, 'img/una semana increible.jpeg'), 
+        (6, 'Un verano sin ti', '2022', Null, 'img/un verano sin ti.jpeg'), 
+        (9, 'Tonight', '2011', 2, 'img/tonight.jpeg');
 
--- interseccion entre albums y artistas  
---SELECT artists.name AS name_artists, albums.name AS name_albums, year AS year_albums FROM albums INNER JOIN artists ON albums.artists_id_fk = artists.id;
+INSERT INTO artists (id, name) VALUES (1, 'Jason Mraz'), (2, 'BigBang'), (3, 'Stray Kids'), (4, 'Backstreet Boys'), (5, 'La Pantera');
 
--- albums sin interseccion con artistas
---SELECT albums.id AS "id", albums."name" AS "name", albums.year AS year FROM albums LEFT JOIN artists ON albums.artists_id_fk = artists.id WHERE albums.artists_id_fk is NULL;
+INSERT INTO songs (id, name, album_id_fk, duracion) VALUES (1, 'PINKY PROMISE', 4, 122), (2, 'Tarot', 6, 237), (3, 'Dos Mil 16', 6, 208), (4, 'ASHE', 4, 156), (5, 'AMORTAL', 4, 167), (6, 'NO ES MI VIDA REAL', 4, 129);
 
-CREATE TABLE songs (id INTEGER PRIMARY KEY,"song" TEXT NOT NULL,duration INTEGER, albums_id_fk INTEGER );
-INSERT INTO songs (id, "song", duration,albums_id_fk) VALUES (1, "La luna me sabe a poco", 267, 1), (2, "DIVINE",187,2),(3, "ASHE",156,4),(4,"Tití me preguntó",243,6),(5,"TONIGHT", 220,9);
+-- Albumes con su artista --
+--SELECT artists.name, albums.name, albums.year FROM albums INNER JOIN artists ON albums.artists_id_fk = artists.id;--
 
-SELECT 
+-- Todos los albums incluyendo los artistas --
+--SELECT albums.id, albums.name, albums.year, artists.name FROM albums LEFT JOIN artists ON albums.artists_id_fk = artists.id;--
+
+-- Artista sin album --
+--SELECT artists.id, artists.name FROM artists LEFT JOIN albums ON albums.artists_id_fk = artists.id WHERE albums.artists_id_fk is NULL;--
+
+-- Albums sin artista --
+--SELECT albums.id, albums.name, albums.year FROM albums LEFT JOIN artists ON albums.artists_id_fk = artists.id WHERE albums.artists_id_fk is NULL;--
+
+-- Albums con artistas, albums sin artistas, artistas sin albums FULL OUTER JOIN--
+--SELECT albums.id, albums.name, albums.year, artists.id, artists.name FROM albums FULL OUTER JOIN artists ON albums.artists_id_fk = artists.id;--
+
+-- Albums sin artistas y artistas sin albums FULL OUTER JOIN WHERE IS NULL--
+--SELECT albums.id, albums.name, albums.year, artists.id, artists.name FROM albums FULL OUTER JOIN artists ON albums.artists_id_fk = artists.id WHERE albums.artists_id_fk is NULL;--
