@@ -119,8 +119,6 @@ indice_apellido = 0
 with open(NOMBRE_ARCHIVO, 'w', newline='', encoding=CODIFICACION) as archivo:
     escritor = csv.writer(archivo, delimiter=DELIMITADOR)
 
-    escritor.writerow(['id', 'nombre', 'edad', 'correo_electronico'])
-
     while contador < TOTAL_CLIENTES:
         nombre = NOMBRES[indice_nombre]
         apellido = APELLIDOS[indice_apellido]
